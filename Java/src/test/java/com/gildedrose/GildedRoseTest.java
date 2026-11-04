@@ -22,4 +22,20 @@ class GildedRoseTest {
         assertEquals(0, app.items[0].quality);
     }
 
+    @Test
+    void conjuredItemLosesTwoQualityBeforeSellByDate() {
+        Item[] items = new Item[] { new Item("Conjured Mana Potion", 20, 40) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(38, app.items[0].quality);
+    }
+
+    @Test
+    void conjuredItemLosesTwoQualityAfterSellByDate() {
+        Item[] items = new Item[] { new Item("Conjured Mana Potion", 0, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertEquals(6, app.items[0].quality);
+    }
+
 }

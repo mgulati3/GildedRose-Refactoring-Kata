@@ -7,13 +7,22 @@ class GildedRose {
         this.items = items;
     }
 
+    private boolean isConjured(Item item) {
+        return item.name.startsWith("Conjured ");
+    }
+
+    private void decreaseQuality(Item item, int amount) {
+        item.quality = Math.max(0, item.quality - amount);
+    }
+
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
+                        int decrease = isConjured(items[i]) ? 2 : 1;
+                        decreaseQuality(items[i], decrease);
                     }
                 }
             } else {
@@ -45,7 +54,8 @@ class GildedRose {
                     if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (items[i].quality > 0) {
                             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
+                                int decrease = isConjured(items[i]) ? 2 : 1;
+                                decreaseQuality(items[i], decrease);
                             }
                         }
                     } else {
